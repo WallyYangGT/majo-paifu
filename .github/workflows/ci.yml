@@ -1,0 +1,18 @@
+name: ci
+
+# 极简门禁：examples 全量样例（正例 + 负例断言）必须被 minimal reader 通过——
+# 规范、样例、reader 三者任一脱节即红灯。
+on:
+  push:
+  pull_request:
+
+jobs:
+  reader:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: minimal reader 校验 examples 全量
+        run: node --experimental-strip-types tools/minimal-reader/majo_reader.ts examples
