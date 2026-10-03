@@ -1,0 +1,2 @@
+# 文本文件入库统一 LF，检出交由各平台 autocrlf 处理
+* text=auto
