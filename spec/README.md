@@ -1,6 +1,6 @@
 # spec/ —— majojson 牌谱格式规范
 
-> 状态：🚧 占位。本目录将收录从主项目内部规范**产品中立化改写**后的《majojson 牌谱格式规范》。目标文件 `majojson-replay-format.md`（文件名用 ASCII 便于跨平台引用，正文中文）。
+> 状态：✅ **已迁入** [`majojson-replay-format.md`](majojson-replay-format.md)——主项目内部规范的产品中立化改写版（§0~§8 + 载荷字段参考 + 四玩法要点 + 改写说明）；天凤互操作段按计划拆至 [`interop/`](../interop/README.md)，样例由 [`examples/`](../examples/README.md) 真实导出物承担。
 
 ## 迁入物与改写口径
 
