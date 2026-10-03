@@ -9,16 +9,18 @@
 
 | 目录 | 内容 | 状态 |
 | --- | --- | --- |
-| [`spec/`](spec/README.md) | `majojson` 牌谱格式规范（产品中立化改写版） | 🚧 占位，待迁入 |
-| [`interop/`](interop/README.md) | 天凤牌谱互操作知识（格式细节、坑与目验方法） | 🚧 占位，待成文 |
-| [`examples/`](examples/README.md) | 真实导出的 golden 样例（四玩法 × format 1/2 × mjai JSONL） | 🚧 占位，待脱敏提炼 |
-| [`tools/`](tools/README.md) | 最小 reader：从零实现、吃样例过校验的验收工具 | 🚧 占位 |
+| [`spec/`](spec/README.md) | `majojson` 牌谱格式规范（产品中立化改写版） | ✅ 已迁入 |
+| [`interop/`](interop/README.md) | 天凤牌谱互操作知识（格式细节、坑与目验方法） | ✅ 已成文 |
+| [`examples/`](examples/README.md) | 真实导出的 golden 样例（四玩法 × format 1/2 × mjai JSONL + 14 负例） | ✅ 已落盘 |
+| [`tools/`](tools/README.md) | 最小 reader：照规范从零实现、吃样例过校验的验收工具 | ✅ 已通过验收（正例 9/9、负例 14/14） |
+
+验收即门禁：push 时 CI 自动跑 minimal reader 校验 examples 全量（规范、样例、reader 任一脱节即红灯）。
 
 ## 路线
 
 本仓是「牌谱格式与引擎开源」三步走的第一步——纯文档、零产品代码风险、独立成立、随时可停：
 
-1. **文档仓（本仓）**：规范 + 真实样例 + 互操作知识；
+1. **文档仓（本仓）✅**：规范 + 真实样例 + 互操作知识 + 验收工具；
 2. 编解码与引擎独立开源库：待时机成熟另起仓库；
 3. 更多——不设时间表。
 

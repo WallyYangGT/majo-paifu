@@ -33,7 +33,7 @@
     --tests "party.mahjong.lan.server.GoldenDumpTest"
   ```
 
-- 生成基线：主仓 develop `410c8e7`（v1.5.3）。格式演进后重跑生成器即可刷新本目录。
+- 生成基线：实现仓 v1.5.3（develop 分支）生成；格式演进后重跑生成器即可刷新本目录。
 
 ## 脱敏声明（入库硬前置，已复核）
 

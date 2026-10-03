@@ -13,10 +13,10 @@
 
 | 目录 | 内容 | 状态 |
 | --- | --- | --- |
-| `spec/` | `majojson` 牌谱格式规范（产品中立化改写版） | 占位，待迁入 |
-| `interop/` | 天凤互操作知识（格式细节、坑与目验方法） | 占位，待成文 |
-| `examples/` | 真实导出的 golden 样例 | 占位，待脱敏提炼 |
-| `tools/` | 最小 reader（从零实现、吃样例过校验） | 占位 |
+| `spec/` | `majojson` 牌谱格式规范（产品中立化改写版） | ✅ 已迁入 |
+| `interop/` | 天凤互操作知识（格式细节、坑与目验方法） | ✅ 已成文 |
+| `examples/` | 真实导出的 golden 样例 + 14 负例 | ✅ 已落盘（生成器在主仓 `feature/golden-dump` 分支） |
+| `tools/` | 最小 reader（从零实现、吃样例过校验） | ✅ 已通过验收 |
 
 > 状态口径**只有一处**：根 `README.md` 的导航表。改动任何目录的落地状态，先更新该表，再更新本表，两处必须一致。
 
@@ -34,4 +34,6 @@
 - 文档语言**简体中文**；文件名用 ASCII（如 `tenhou-interop.md`）；代码/字段标识符保留原文。
 - 提交信息遵循 **Conventional Commits**，中文描述（与主仓习惯一致），类型常用 `docs` / `feat` / `fix` / `chore`，作用域用目录名，示例：`docs(spec): 迁入格式规范中立化改写版`。
 - 行尾：`.gitattributes` 已声明 `* text=auto`，不要手改。
-- 本仓没有构建、没有测试门禁；把上面第 6 条的验收当作门禁——交付规范/样例/知识文时，自问「陌生人只凭本仓内容能否复现」。
+- 本仓的构建/门禁只有一个：`.github/workflows/ci.yml` 跑 `tools/minimal-reader` 校验 `examples/`
+  全量（正例 + 负例断言）。改规范、样例或 reader 后本地先跑一遍再提交：
+  `node --experimental-strip-types tools/minimal-reader/majo_reader.ts examples`。
