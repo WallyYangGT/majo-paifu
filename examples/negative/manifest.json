@@ -1,0 +1,75 @@
+{
+  "description": "负例样例：每个文件应被 majojson 消费方拒收并返回对应错误码（规范 §5.1 步骤与错误码）。除目标违例点外其余结构合法。",
+  "cases": [
+    {
+      "file": "not_majo-tenhou.json",
+      "expect": "not_majo",
+      "why": "纯天凤 JSON（有 log+rule 无 majo）"
+    },
+    {
+      "file": "bad_file-json.txt",
+      "expect": "bad_file",
+      "why": "JSON 解析失败"
+    },
+    {
+      "file": "bad_file-empty.json",
+      "expect": "bad_file",
+      "why": "无 majo 键且不像天凤"
+    },
+    {
+      "file": "bad_shape-majo-not-object.json",
+      "expect": "bad_shape",
+      "why": "majo 非对象"
+    },
+    {
+      "file": "bad_version-format.json",
+      "expect": "bad_version",
+      "why": "format 高于支持版本"
+    },
+    {
+      "file": "not_supported-ruleset.json",
+      "expect": "not_supported",
+      "why": "ruleset 白名单外"
+    },
+    {
+      "file": "bad_shape-seat-index.json",
+      "expect": "bad_shape",
+      "why": "seats[i].seat != i"
+    },
+    {
+      "file": "bad_shape-seats-length.json",
+      "expect": "bad_shape",
+      "why": "seats 长度 != 4"
+    },
+    {
+      "file": "bad_shape-tile-code.json",
+      "expect": "bad_shape",
+      "why": "牌码违反文法"
+    },
+    {
+      "file": "bad_shape-phase.json",
+      "expect": "bad_shape",
+      "why": "phase 白名单外"
+    },
+    {
+      "file": "bad_shape-drawpositions.json",
+      "expect": "bad_shape",
+      "why": "drawPositions 值域越界"
+    },
+    {
+      "file": "bad_shape-missing-concealed.json",
+      "expect": "bad_shape",
+      "why": "座位缺必需字段 concealed"
+    },
+    {
+      "file": "bad_shape-match-masquerade.json",
+      "expect": "bad_shape",
+      "why": "format 2 冒充（单手载荷无 hands）"
+    },
+    {
+      "file": "bad_shape-match-ruleset.json",
+      "expect": "bad_shape",
+      "why": "容器内手 ruleSet 与容器 ruleset 不符"
+    }
+  ]
+}
