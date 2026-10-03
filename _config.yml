@@ -1,0 +1,12 @@
+# GitHub Pages（Jekyll）站点配置——纯 Markdown 零构建。
+# 仓内 .md 相对链接由 jekyll-relative-links（Pages 默认白名单插件）自动改写为 .html，
+# 因此根 README 的导航表即站点导航，无需另建目录页。
+theme: minima
+lang: zh-CN
+title: majo-paifu
+description: >-
+  「麻将面对面」牌谱格式开放知识库：majojson 规范 · golden 样例 · 天凤互操作知识。
+  牌打完，牌谱带得走。
+markdown: kramdown
+kramdown:
+  input: GFM
