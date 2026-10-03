@@ -335,7 +335,7 @@ majojson 的导入/回放仍完好。
 | --- | --- | --- | --- |
 | `source` | string | ✓ | `SELF_DRAW`（自摸）/`DISCARD`（荣和）/`ROBBED_KAN`（抢杠）/`KAN_REPLACEMENT`（杠上）/`LAST_TILE_WALL`（海底）/`LAST_TILE_DISCARD`（河底） |
 | `winners` | WinnerInfo[] | ✓ | 赢家（可多家：一炮多响） |
-| `deltas` | ScoreDelta[] | ✓ | 四家分差（含 0；分差守恒由玩法保证） |
+| `deltas` | ScoreDelta[] | ✓ | 各座位分差变动，**稀疏**——只含有变动的座位（分差守恒由玩法保证；日麻放铳/自摸恒两家、川麻血战出局者不产生收支）。`score` 为变动后累计分 |
 | `discardBy` | int? | — | 放铳/河底炮的弃牌者座位（自摸/抢杠缺省） |
 | `uraDoraIndicators` | string[]? | — | 里宝揭示（日麻、立直者和牌时） |
 
