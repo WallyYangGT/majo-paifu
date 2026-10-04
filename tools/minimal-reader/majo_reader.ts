@@ -285,8 +285,19 @@ function checkHand(hand: unknown, ruleset: string, where: string): HandSummary {
       if (replay.drawPositions.length > wallSize)
         throw new MajoError("bad_shape", `${where}.drawPositions 超长`);
     }
-  } else if (replay.deadSize !== undefined && replay.deadSize !== null) {
-    throw new MajoError("bad_shape", `${where}.deadSize 与 wall 同生存`);
+  } else {
+    // wall 缺席时的孤立 deadSize/drawPositions：有意容忍（§3.3），公开样例
+    // sichuan/majo-sichuan-match-*.json 即「有 drawPositions、无 wall」形态。
+    // 仍按字段类型校验（严格解码口径），但不做需要 wallSize 的一致性检查
+    //（值域/长度上界都以 wall 为参照，无 wall 则无从谈起）。
+    if (replay.deadSize !== undefined && replay.deadSize !== null && !isInt(replay.deadSize))
+      throw new MajoError("bad_shape", `${where}.deadSize 应为 int`);
+    if (replay.drawPositions !== undefined && replay.drawPositions !== null) {
+      if (!isArr(replay.drawPositions)) throw new MajoError("bad_shape", `${where}.drawPositions 应为数组`);
+      replay.drawPositions.forEach((p, i) => {
+        if (!isInt(p)) throw new MajoError("bad_shape", `${where}.drawPositions[${i}] 应为 int`);
+      });
+    }
   }
 
   const frames = replay.frames.map((f, i) => checkFrame(f, i, ruleset, wallSize));

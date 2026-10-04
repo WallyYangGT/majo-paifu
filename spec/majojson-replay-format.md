@@ -124,8 +124,8 @@
 | `wins` | array | ✓ | `HandSettlement` 数组（可为空数组，不可缺） |
 | `ryukyoku` | object? | — | `ReplayRyukyoku`，流局手携带 |
 | `wall` | array? | — | 完整原始牌墙牌码（摸牌顺序，含王牌）；崩溃恢复局为 null |
-| `deadSize` | int? | — | 王牌张数（日麻 14，其余 0）；与 `wall` 同生存 |
-| `drawPositions` | array? | — | 「按位查看牌墙」的已消耗位置日志；`wall` 为 null 时同 null |
+| `deadSize` | int? | — | 王牌张数（日麻 14，其余 0）；与 `wall` 通常同生存，但**消费方必须容忍其单独存在**（同 `drawPositions` 口径） |
+| `drawPositions` | array? | — | 「按位查看牌墙」的已消耗位置日志；与 `wall` 通常同生存，但**消费方必须容忍 `wall` 缺席或为 null 时单独携带**（不得拒收）——[`examples/`](../examples/) 的川麻整局样例（`sichuan/majo-sichuan-match-*.json`）即「有 `drawPositions`、无 `wall`」形态 |
 
 ### 3.4 实现注意（生成方与消费方共用）
 
@@ -173,6 +173,10 @@
 4. `majo.format` 高于支持的版本 → `bad_version`。
 5. `majo.replay` 严格解码 + §4 语义检查失败 → `bad_shape`（format 2 容器同理，见 §8.2）。
 6. `ruleset` 不在四玩法内 → `not_supported`。
+
+   > **分派序注**：第 5/6 步的先后属于实现自由。参考实现与本仓最小 reader 都**先做玩法白名单、
+   > 后做载荷解码**——「既非四玩法、又结构畸形」的双坏文件返回 `not_supported` 而非 `bad_shape`；
+   > 单坏文件两种次序结果相同。消费方断言错误码时以「单坏」用例为准（本仓负例语料亦全部为单坏）。
 
 消费方的落盘/登记策略（先写盘再登记列表等）属于实现自由，不属于格式规范；
 但错误必须如实呈现给用户，不得留下"列表有、文件无"的幽灵条目。
